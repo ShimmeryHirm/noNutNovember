@@ -1,0 +1,3 @@
+TOKEN = "1370440790:AAFWIUcAxzvgXWptPbn3pD3I9XFna6YbKW0"
+
+DATABASE_URL = "postgres://xjdjqhmgkhuwuv:b996449e38874474bdb800f5b47189484e56646596cc90fa6a851d5c72e85ad7@ec2-34-200-106-49.compute-1.amazonaws.com:5432/dfogj6n5m0522t"
