@@ -1,3 +1,4 @@
-SQLAlchemy
 python-telegram-bot
+SQLAlchemy
+psycopg2-binary
 redis
