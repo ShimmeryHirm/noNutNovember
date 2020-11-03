@@ -7,4 +7,5 @@ COPY main.py /bin
 COPY config.py /bin
 
 COPY core /bin
-CMD python3 /bin/main.py
+
+ENTRYPOINT ["python3" "/bin/main.py"]
