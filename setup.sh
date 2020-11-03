@@ -1,5 +1,5 @@
-docker stop nofap
-docker rm nofap
-docker image rm nofap:latest
-docker build . -t nofap
-docker run -d --restart always --name nofap nofap
+docker stop signal-bot
+docker rm signal-bot
+docker image rm signal-bot:latest
+docker build . -t signal-bot
+docker run -d --restart always --name signal-bot signal-bo
