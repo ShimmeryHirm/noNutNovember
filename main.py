@@ -1,4 +1,4 @@
-from telegram import ParseMode
+from telegram import ParseMode, TelegramError
 from telegram.ext import *
 
 import config
@@ -44,10 +44,19 @@ def donate(update, context):
         chat_id=update.message.chat_id, parse_mode='Markdown')
 
 
+def say(update, context):
+    with session_scope() as session:
+        users_query = session.query(UsersTable).all()
+
+        for user in users_query:
+            try:
+                context.bot.send_message(chat_id=user.id, text=update.message.text.split('/say ')[1])
+            except TelegramError:
+                pass
 
 
 def main():
-    #db_map.Base.metadata.drop_all(db_map.engine)  # Drop all tables
+    # db_map.Base.metadata.drop_all(db_map.engine)  # Drop all tables
     Base.metadata.create_all(engine)  # Create all tables if not exist
     updater = Updater(config.TOKEN, use_context=True)  # http://t.me/SyneXbot
     dp = updater.dispatcher
@@ -60,6 +69,7 @@ def main():
     dp.add_handler(CommandHandler("start", start, filters=filters))
 
     dp.add_handler(CommandHandler("donate", donate, filters=filters))
+    dp.add_handler(CommandHandler("say", say, filters=admin_filters))
 
     dp.add_handler(CallbackQueryHandler(callback_worker))
 
