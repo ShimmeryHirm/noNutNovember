@@ -17,7 +17,7 @@ def callback_worker(update, context):
         with session_scope() as session:
             session.query(UsersTable).filter_by(id=query.message.chat.id).update({UsersTable.side: 1})
             context.bot.answer_callback_query(callback_query_id=query.id,
-                                              text='Ты должен был бороться со злом, а не примкнуть к нему!',
+                                              text='Ты сделал правильный выбор.',
                                               show_alert=True)
 
             query.message.edit_text(
