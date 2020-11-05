@@ -10,6 +10,7 @@ from core.db_map import UsersTable, session_scope, Base, engine
 from core.error import error
 from core.keyborads import Keyboards
 from core.utils import create_new_account
+import pytz
 
 values = ['2019', '12', '31', '00', '00', '00']
 launch_date = datetime(*map(int, values))

@@ -1,5 +1,7 @@
+from datetime import datetime
 from time import strftime
 
+import pytz
 from telegram import ParseMode
 
 from core import utils
@@ -46,6 +48,8 @@ def callback_worker(update, context):
                  f'<i>До конца недрочабря <b>{utils.calc_days()}</b> дней</i>\n\n'
         )
     if query.data == 'reload':
+        d = datetime.now(pytz.timezone("Europe/Moscow"))
+        t = d.strftime("%d.%m.%Y %H:%M")
         x = query.message.text.split()
         l = []
         for i in x:
@@ -73,7 +77,7 @@ def callback_worker(update, context):
                         text=f'<i>👋Приветствую</i>\n\n'
                              f'<b>Ты на темной стороне 🤝</b>\n'
                              f'<i>Джедаям страдать еще <b>{utils.calc_days()}</b> дней</i>\n\n'
-                             f'<b>[📈СТАТИСТИКА от {strftime("%d.%m.%Y %H:%M")}]\n</b>'
+                             f'<b>[📈СТАТИСТИКА от {t}]\n</b>'
                              f'<i>👷Людей в боте:</i> <b>{len(users)} (+{new_users})\n</b>'
                              f'<i>✊Джедаев:</i> <b>{len(white)} (+{new_white})\n</b>'
                              f'<i>👹Ситхов:</i> <b>{len(dark)} (+{new_dark})</b>')
@@ -84,7 +88,7 @@ def callback_worker(update, context):
                         text=f'<i>👋Приветствую </i>\n'
                              f'<b>Ты на светлой стороне✊</b>\n'
                              f'<i>До конца недрочабря <b>{utils.calc_days()}</b> дней</i>\n\n'
-                             f'<b>[📈СТАТИСТИКА от {strftime("%d.%m.%Y %H:%M")}]\n</b>'
+                             f'<b>[📈СТАТИСТИКА от {t}]\n</b>'
                              f'<i>👷Людей в боте:</i> <b>{len(users)} (+{new_users})\n</b>'
                              f'<i>✊Джедаев:</i> <b>{len(white)} (+{new_white})\n</b>'
                              f'<i>👹Ситхов:</i> <b>{len(dark)} (+{new_dark})</b>\n\n'
