@@ -1,13 +1,18 @@
+from datetime import datetime
+
 from telegram import ParseMode, TelegramError
 from telegram.ext import *
 
 import config
-from core import db_map
+from core import db_map, utils
 from core.callback_worker import callback_worker
 from core.db_map import UsersTable, session_scope, Base, engine
 from core.error import error
 from core.keyborads import Keyboards
 from core.utils import create_new_account
+
+values = ['2019', '12', '31', '00', '00', '00']
+launch_date = datetime(*map(int, values))
 
 
 def start(update, context):
@@ -27,14 +32,18 @@ def start(update, context):
 
                                      parse_mode=ParseMode.HTML,
                                      text=f'<i>👋Приветствую {user.name}</i>\n'
-                                          f'<b>Ты на темной стороне 👹 </b>\n')
+                                          f'<b>Ты на темной стороне 🤝 </b>\n'
+                                          f'<i>Джедаям страдать еще <b>{utils.calc_days()}</b> дней</i>\n\n'
+
+                                     )
         else:
             context.bot.send_message(chat_id=chat.id,
                                      reply_markup=Keyboards().main_menu_keyboard,
                                      parse_mode=ParseMode.HTML,
                                      text=f'<i>👋Приветствую {user.name}</i>\n'
                                           f'<b>Ты на светлой стороне✊</b>\n'
-                                          '\n'
+                                          f'<i>До конца недрочабря <b>{utils.calc_days()}</b> дней</i>\n\n'
+
                                           '<code>Чтобы чтобы примкнуть к ситхам нажми кнопку ниже🔽:</code>')
 
 
